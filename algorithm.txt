@@ -1,0 +1,15 @@
+Suppose the gene has 10 copies in the beginning (at the root of the tree), each containing 20 amino acids.
+
+Define a(alpha) as the gain rate, the possiblity that a gene copy has been duplicated within a generation; define b(beta) as the loss rate, the possibility that a gene copy has been lost within a generation.
+
+A certain copy of the gene has two states during evolution: 0 means abscence and 1 means presence. The two states swith from generation to generation due to gain gain and loss processes. Suppose the starting state is 0, if we observe state 1 in the end, that means this copy has been gained; on the contrary, if we observe state 0 in the end, that means the copy has lost. We randomly pick one copy along each branch length, the number of copies this copy will gain or lose during this period of time can be determined by poisson distribution.
+
+By definition, alpha is the possibility of 0 to 1 transition while beta is the possibility of 1 to 0 transition. Therefore we can equate the gain-loss process to the transition model describeed in the reference book and calculate the probabilities using the formulas.
+
+Expected possibility of gaining gene copies after time t: E(gain) = p01 = a/(a+b)(1-exp(-(a+b)t)) Expected possibility of losing gene copies after time t: E(loss) = p10 = 1 - p01
+
+Assumming molecular clock, the number of mutations is the product of mutation rate and evolutionary time (t), then: t = L/u, where L is branch length. We use generation as the time unit.
+
+Get the path from root to tip of each lineage, simulate the changes of copy number along the lineage and get the final count of each taxon. The expected change of copy number after t time is (a - b)t Do the gain-loss simulation thousands of times and compare the results with the mean value.
+
+from Bio import Phylo
